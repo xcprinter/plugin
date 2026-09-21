@@ -18,7 +18,11 @@ export default class {
     this.connectedDevice = {}
     this.objectId = Math.random()
     this.enabled = true
-    this.chunkSize = 20  // 安卓小程序默认只支持 20 字节，打印图片时单独配置实例
+    if (api.getDeviceInfo().platform === 'android') {
+      this.chunkSize = 20  // 安卓小程序默认只支持 20 字节，打印图片时单独配置实例
+    } else {
+      this.chunkSize = 200
+    }
   }
 
   // 获取本机蓝牙适配器状态
