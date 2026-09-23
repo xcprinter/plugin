@@ -110,13 +110,7 @@ export default class extends Bluetooth {
       deviceId,
       success: res => {
         console.debug('连接蓝牙：', deviceId, res)
-        wx.getBLEMTU({
-          deviceId,
-          success: mtuRes => {
-            console.debug('最大传输单元为：', mtuRes)
-            this.chunkSize = mtuRes.mtu
-          }
-        })
+        this.setMtu(deviceId)
         if (successCallback) {
           this.getBLEDeviceServices(deviceId, successCallback)
         }
@@ -171,6 +165,7 @@ export default class extends Bluetooth {
               if (servicesLength === index + 1) {
                 console.debug('获取打印机', this.connectedDevice)
                 if (this.connectedDevice.deviceId) {
+                  this.setMtu(deviceId)
                   successCallback?.({ devices: this.allDevices, printable: true })
                 } else {
                   this.api.showModal({
