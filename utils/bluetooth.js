@@ -205,9 +205,14 @@ export default class {
   setMtu(deviceId) {
     this.api.getBLEMTU({
       deviceId,
-      success: mtuRes => {
-        console.debug('最大传输单元为：', mtuRes)
-        this.chunkSize = mtuRes.mtu - 3
+      success: res => {
+        console.debug('最大传输单元为：', res)
+        this.chunkSize = res.mtu - 3
+
+        this.api.onBLEMTUChange(changedRes => {
+          console.debug('最大传输单元变更为：', changedRes)
+          this.chunkSize = changedRes.mtu - 3
+        })
       }
     })
   }
