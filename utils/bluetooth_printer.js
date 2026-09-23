@@ -110,6 +110,13 @@ export default class extends Bluetooth {
       deviceId,
       success: res => {
         console.debug('连接蓝牙：', deviceId, res)
+        wx.getBLEMTU({
+          deviceId,
+          success: mtuRes => {
+            console.debug('最大传输单元为：', mtuRes)
+            this.chunkSize = mtuRes.mtu
+          }
+        })
         if (successCallback) {
           this.getBLEDeviceServices(deviceId, successCallback)
         }
