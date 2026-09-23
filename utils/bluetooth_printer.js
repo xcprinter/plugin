@@ -125,17 +125,22 @@ export default class extends Bluetooth {
     this.api.getBLEDeviceServices({
       deviceId,
       success: res => {
-        const availableServices = res.services.filter(service => service.isPrimary && service.uuid.toLowerCase().startsWith('0000'))
-        const servicesLength = availableServices.length
+        let availableServices = res.services.filter(service => service.isPrimary && service.uuid.toLowerCase().startsWith('0000ff00'))
 
-        if (servicesLength === 0) {
-          console.debug('特征值没符合条件的!')
+        if (availableServices.length === 0) {
+          console.debug('特征值没符合条件的，列出所有服务：')
           res.services.forEach(service => {
-            console.debug('dddd', service)
-            console.debug('isPrimary: ', service.isPrimary, 'uuid:', service.uuid)
+            console.debug(service)
           })
+          console.debug('==' * 20)
+          availableServices = res.services.filter(service => service.isPrimary && service.uuid.toLowerCase().startsWith('0000'))
         }
- 
+
+        if (availableServices.length === 0) {
+          availableServices = res.services.filter(service => service.isPrimary && service.uuid.endsWith('0000-1000-8000-00805F9B34FB'))
+        }
+
+        const servicesLength = availableServices.length
         availableServices.forEach((service, index) => {
           console.debug('设备 ID：', deviceId, '主服务：', service.uuid)
           // 获取蓝牙设备服务中所有特征
@@ -144,7 +149,7 @@ export default class extends Bluetooth {
             serviceId: service.uuid,
             success: res => {
               for (const characteristic of res.characteristics) {
-                console.debug('特征值', deviceId, service.uuid, characteristic.uuid, characteristic.properties)
+                console.debug('特征值', service.uuid, characteristic.uuid, characteristic.properties)
                 if (characteristic.properties.write && characteristic.uuid.toLowerCase().startsWith('0000')) {
                   console.debug('可写入', deviceId, service.uuid, characteristic.uuid)
                   this.connectedDevice = {
@@ -152,6 +157,7 @@ export default class extends Bluetooth {
                     serviceId: service.uuid,
                     characteristicId: characteristic.uuid
                   }
+                  break // 找到符合条件的之后就跳出循环
                 }
               }
               // 所有 service 的特制值已获取完毕
