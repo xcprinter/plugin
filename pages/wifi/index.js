@@ -1,5 +1,6 @@
 import BluetoothPrinter from '../../utils/bluetooth_printer'
 import { PrintCommand } from 'xcprinter'
+import { TextDecoder } from 'text-encoding'
 
 Page({
   onLoad(options) {
