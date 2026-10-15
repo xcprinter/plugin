@@ -55,6 +55,7 @@ Component({
     },
 
     doConnect(deviceId) {
+      console.log('正在连接设备：', deviceId)
       wx.createBLEConnection({
         deviceId: deviceId,
         success: res => {
