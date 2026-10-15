@@ -18,15 +18,12 @@ Component({
   },
 
   lifetimes: {
-    attached() {
+    ready() {
       this.setData({
         connectedId: wx.getStorageSync('connectedId'),
         connectedName: wx.getStorageSync('connectedName')
       })
 
-      if (this.data.connectedId) {
-        this.doConnect(this.data.connectedId)
-      }
       this.printer = new BluetoothPrinter(wx, this)
       if (this.data.deviceName) {
         this.printer.filteredDevices = this.data.deviceName.split(',')
@@ -34,6 +31,16 @@ Component({
       this.printer.getState({
         success: res => {
           this.setData({ devices: res.devices })
+          if (this.data.connectedId) {
+            this.doConnect(this.data.connectedId)
+            this.triggerEvent(
+              'printerReady', 
+              { 
+                connectedId: this.data.connectedId,
+                connectedName: this.data.connectedName
+              }
+            )
+          }
         }
       })
     }
