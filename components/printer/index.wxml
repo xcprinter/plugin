@@ -9,7 +9,6 @@
     data-device-id="{{item.deviceId}}"
     data-device-name="{{item.name || item.localName}}"
     class="device_item"
-    hover-class="device_item_hover"
   >
     <view class="device_item__inner">
       <text>{{item.name}}</text>
@@ -17,6 +16,7 @@
         wx:if="{{connectedId === item.deviceId && connected}}"
         bind:tap="closeBLEConnection"
         class="weui-badge"
+        hover-class="device_item_hover"
       >已连接（点击断开）</text>
       <text
         wx:elif="{{connectedId === item.deviceId}}"
@@ -26,6 +26,7 @@
         wx:else
         bind:tap="createBLEConnection"
         class="weui-badge"
+        hover-class="device_item_hover"
         style="background-color: darkgrey"
       >未连接（点击连接）</text>
     </view>
