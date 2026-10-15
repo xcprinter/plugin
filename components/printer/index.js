@@ -24,6 +24,9 @@ Component({
         connectedName: wx.getStorageSync('connectedName')
       })
 
+      if (this.data.deviceId) {
+        this.doConnect(this.data.deviceId)
+      }
       this.printer = new BluetoothPrinter(wx, this)
       if (this.data.deviceName) {
         this.printer.filteredDevices = this.data.deviceName.split(',')
@@ -46,8 +49,14 @@ Component({
 
       wx.setStorageSync('connectedId', ds.deviceId)
       wx.setStorageSync('connectedName', ds.deviceName)
+      this.doConnect(deviceId)
+
+      this.triggerEvent('selected', { ...ds })
+    },
+
+    doConnect(deviceId) {
       wx.createBLEConnection({
-        deviceId: ds.deviceId,
+        deviceId: deviceId,
         success: res => {
           this.setData({ connected: true })
         },
@@ -58,8 +67,6 @@ Component({
           })
         }
       })
-
-      this.triggerEvent('selected', { ...ds })
     },
 
     closeBLEConnection(e) {
