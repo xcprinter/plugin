@@ -47,6 +47,7 @@ Component({
       wx.createBLEConnection({
         deviceId: ds.deviceId,
         success: res => {
+          this.setData({ connected: true })
         },
         fail: res => {
           wx.showModal({
