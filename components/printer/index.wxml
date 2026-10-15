@@ -2,12 +2,11 @@
   <text>已发现 {{devices.length}} 个设备：</text>
   <view bind:tap="restartBluetooth">重新搜索</view>
 </view>
+
 <scroll-view class="device_list" scroll-y scroll-with-animation>
   <view
     wx:for="{{devices}}"
     wx:key="index"
-    data-device-id="{{item.deviceId}}"
-    data-device-name="{{item.name || item.localName}}"
     class="device_item"
   >
     <view class="device_item__inner">
@@ -15,6 +14,8 @@
       <text
         wx:if="{{connectedId === item.deviceId && connected}}"
         bind:tap="closeBLEConnection"
+        data-device-id="{{item.deviceId}}"
+        data-device-name="{{item.name || item.localName}}"
         class="weui-badge"
         hover-class="device_item_hover"
       >已连接（点击断开）</text>
@@ -25,6 +26,8 @@
       <text
         wx:else
         bind:tap="createBLEConnection"
+        data-device-id="{{item.deviceId}}"
+        data-device-name="{{item.name || item.localName}}"
         class="weui-badge"
         hover-class="device_item_hover"
         style="background-color: darkgrey"
