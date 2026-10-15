@@ -67,6 +67,7 @@ Component({
         deviceId: deviceId,
         success: res => {
           this.setData({ connected: true })
+          this.triggerEvent('connected', { ...ds })
         },
         fail: res => {
           wx.showModal({
