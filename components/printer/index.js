@@ -33,13 +33,6 @@ Component({
           this.setData({ devices: res.devices })
           if (this.data.connectedId) {
             this.doConnect(this.data.connectedId)
-            this.triggerEvent(
-              'ready',
-              {
-                connectedId: this.data.connectedId,
-                connectedName: this.data.connectedName
-              }
-            )
           }
         }
       })
@@ -67,7 +60,12 @@ Component({
         deviceId: deviceId,
         success: res => {
           this.setData({ connected: true })
-          this.triggerEvent('connected', { ...ds })
+          this.triggerEvent(
+            'connected',
+            {
+              connectedId: deviceId
+            }
+          )
         },
         fail: res => {
           wx.showModal({
