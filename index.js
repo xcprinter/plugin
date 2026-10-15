@@ -15,7 +15,6 @@ if (typeof globalThis !== 'undefined') {
   window.TextEncoder = window.TextEncoder || TextEncoder
 }
 
-
 export {
   BluetoothPrinter,
   BluetoothWeigher,
