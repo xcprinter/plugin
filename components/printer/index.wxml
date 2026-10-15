@@ -13,7 +13,7 @@
   >
     <view class="device_item__inner">
       <text>{{item.name}}</text>
-      <text 
+      <text
         wx:if="{{connectedId === item.deviceId && connected}}"
         bind:tap="closeBLEConnection"
         class="weui-badge"
@@ -22,7 +22,7 @@
         wx:elif="{{connectedId === item.deviceId}}"
         class="weui-badge"
       >连接中</text>
-      <text 
+      <text
         wx:else
         bind:tap="createBLEConnection"
         class="weui-badge"
