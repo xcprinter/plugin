@@ -49,8 +49,8 @@ Component({
 
       wx.setStorageSync('connectedId', ds.deviceId)
       wx.setStorageSync('connectedName', ds.deviceName)
-      this.doConnect(deviceId)
 
+      this.doConnect(ds.deviceId)
       this.triggerEvent('selected', { ...ds })
     },
 
