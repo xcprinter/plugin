@@ -34,8 +34,8 @@ Component({
           if (this.data.connectedId) {
             this.doConnect(this.data.connectedId)
             this.triggerEvent(
-              'printerReady', 
-              { 
+              'ready',
+              {
                 connectedId: this.data.connectedId,
                 connectedName: this.data.connectedName
               }
