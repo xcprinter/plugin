@@ -25,7 +25,9 @@ Component({
       })
 
       this.printer = new BluetoothPrinter(wx, this)
-      this.printer.filteredDevices = this.data.deviceName.split(',')
+      if (this.data.deviceName) {
+        this.printer.filteredDevices = this.data.deviceName.split(',')
+      }
       this.printer.getState({
         success: res => {
           this.setData({ devices: res.devices })

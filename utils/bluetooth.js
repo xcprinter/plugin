@@ -105,7 +105,10 @@ export default class {
     devices.forEach(device => {
       if (!device.name && !device.localName) { return }
       if (!device.RSSI) { return }
-      if (this.blockedDevices.length >= 1 && this.blockedDevices.find(e => device.name.includes(e))) { return }
+      if (this.blockedDevices.length >= 1 && this.blockedDevices.find(e => device.name.includes(e))) { 
+        console.debug('设备已被屏蔽')
+        return 
+      }
       if (this.filteredDevices.length === 0 || (this.filteredDevices.length >= 1 && this.filteredDevices.some(e => e === '' || device.name.includes(e)))) {
         const item = allDevices.find(e => e.deviceId === device.deviceId)
         if (item) {
