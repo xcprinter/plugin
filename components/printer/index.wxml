@@ -14,7 +14,7 @@
   >
     <view class="device_item__inner">
       <text>{{item.name}}</text>
-      <text wx:if="{{connected}}">已连接</text>
+      <text wx:if="{{connectedId === item.deviceId && connected}}" class="weui-badge">已连接</text>
       <text wx:elif="{{connectedId === item.deviceId}}" class="weui-badge">连接中</text>
       <text wx:else class="weui-badge" style="background-color: darkgrey">未连接</text>
     </view>

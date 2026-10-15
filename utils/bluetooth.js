@@ -112,7 +112,6 @@ export default class {
         console.debug('设备已被屏蔽')
         return 
       }
-      console.debug('-----', this.filteredDevices)
       if (this.filteredDevices.length === 0 || (this.filteredDevices.length >= 1 && this.filteredDevices.some(e => e === '' || device.name.includes(e)))) {
         const item = allDevices.find(e => e.deviceId === device.deviceId)
         if (item) {
