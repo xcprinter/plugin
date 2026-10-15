@@ -24,8 +24,8 @@ Component({
         connectedName: wx.getStorageSync('connectedName')
       })
 
-      if (this.data.deviceId) {
-        this.doConnect(this.data.deviceId)
+      if (this.data.connectedId) {
+        this.doConnect(this.data.connectedId)
       }
       this.printer = new BluetoothPrinter(wx, this)
       if (this.data.deviceName) {
