@@ -104,10 +104,9 @@ export default class {
     console.debug('本次筛选：', devices.length, devices)
     devices.forEach(device => {
       if (!device.name && !device.localName) { 
-        console.debug('设备没名字')
+        console.debug('设备没名字', device.name)
         return 
       }
-      //if (!device.RSSI) { return }
       if (this.blockedDevices.length >= 1 && this.blockedDevices.find(e => device.name.includes(e))) { 
         console.debug('设备已被屏蔽')
         return 

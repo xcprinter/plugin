@@ -116,7 +116,10 @@ export default class extends Bluetooth {
         }
       },
       fail: res => {
-        console.debug('连接蓝牙设备失败', deviceId, res)
+        this.api.showModal({
+          title: '连接蓝牙设备失败',
+          content: JSON.stringify(res)
+        })
       }
     })
   }
