@@ -3,6 +3,8 @@ import BluetoothPrinter from '../../utils/bluetooth_printer'
 Component({
   behaviors: ['wx://component-export'],
 
+  // 参考：https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/events.html
+  // 用于组件间通信
   export() {
     return {
       connectedId: this.data.connectedId,
@@ -43,12 +45,12 @@ Component({
     createBLEConnection(e) {
       const ds = e.currentTarget.dataset
       this.setData({
-        connectedId: ds.deviceId,
-        connectedName: ds.deviceName
+        selectedId: ds.deviceId,
+        selectedName: ds.deviceName
       })
 
-      wx.setStorageSync('connectedId', ds.deviceId)
-      wx.setStorageSync('connectedName', ds.deviceName)
+      wx.setStorageSync('selectedId', ds.deviceId)
+      wx.setStorageSync('selectedName', ds.deviceName)
 
       this.doConnect(ds.deviceId, ds.deviceName)
       this.triggerEvent('selected', { ...ds })
@@ -59,7 +61,7 @@ Component({
       wx.createBLEConnection({
         deviceId: deviceId,
         success: res => {
-          this.setData({ connected: true })
+          this.setData({ connectedId: deviceId })
           this.triggerEvent(
             'connected',
             {
@@ -86,11 +88,11 @@ Component({
         }
       })
       this.setData({ 
-        connectedId: '',
-        connectedName: ''
+        selectedId: '',
+        selectedName: ''
       })
-      wx.removeStorageSync('connectedId')
-      wx.removeStorageSync('connectedName')
+      wx.removeStorageSync('selectedId')
+      wx.removeStorageSync('selectedName')
 
       this.triggerEvent('unselected', { ...ds })
     },
