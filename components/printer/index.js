@@ -32,7 +32,7 @@ Component({
         success: res => {
           this.setData({ devices: res.devices })
           if (this.data.connectedId) {
-            this.doConnect(this.data.connectedId)
+            this.doConnect(this.data.connectedId, this.data.connectedName)
           }
         }
       })
@@ -50,11 +50,11 @@ Component({
       wx.setStorageSync('connectedId', ds.deviceId)
       wx.setStorageSync('connectedName', ds.deviceName)
 
-      this.doConnect(ds.deviceId)
+      this.doConnect(ds.deviceId, ds.deviceName)
       this.triggerEvent('selected', { ...ds })
     },
 
-    doConnect(deviceId) {
+    doConnect(deviceId, deviceName) {
       console.log('正在连接设备：', deviceId)
       wx.createBLEConnection({
         deviceId: deviceId,
@@ -63,7 +63,8 @@ Component({
           this.triggerEvent(
             'connected',
             {
-              connectedId: deviceId
+              deviceId: deviceId,
+              deviceName: deviceName
             }
           )
         },
