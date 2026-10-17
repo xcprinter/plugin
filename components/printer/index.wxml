@@ -34,7 +34,6 @@
         data-device-name="{{item.name || item.localName}}"
         class="weui-badge"
         hover-class="device_item_hover"
-        style="background-color: darkgrey"
       >未连接（点击连接）</text>
     </view>
   </view>
