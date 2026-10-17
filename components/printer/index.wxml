@@ -1,6 +1,6 @@
 <view class="devices_summary">
   <text>已发现 {{devices.length}} 个设备：</text>
-  <view bind:tap="restartBluetooth">重新搜索</view>
+  <view bind:tap="restartBluetooth" class="text-link">重新搜索</view>
 </view>
 
 <scroll-view class="device_list" scroll-y scroll-with-animation>
@@ -19,6 +19,10 @@
         class="weui-badge"
         hover-class="device_item_hover"
       >已连接（点击断开）</text>
+      <text
+        wx:elif="{{selectedId === item.deviceId && failedId == item.deviceId}}"
+        class="weui-badge"
+      >连接失败</text>
       <text
         wx:elif="{{selectedId === item.deviceId}}"
         class="weui-badge"

@@ -6,6 +6,10 @@
   padding: 0.75rem;
 }
 
+.text-link {
+  color: hsl(210deg, 100%, 58%);
+}
+
 .px-3 {
   padding-left: 0.75rem;
   padding-right: 0.75rem;

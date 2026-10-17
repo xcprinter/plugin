@@ -22,8 +22,8 @@ Component({
   lifetimes: {
     ready() {
       this.setData({
-        connectedId: wx.getStorageSync('connectedId'),
-        connectedName: wx.getStorageSync('connectedName')
+        selectedId: wx.getStorageSync('selectedId'),
+        selectedName: wx.getStorageSync('selectedName')
       })
 
       this.printer = new BluetoothPrinter(wx, this)
@@ -33,8 +33,8 @@ Component({
       this.printer.getState({
         success: res => {
           this.setData({ devices: res.devices })
-          if (this.data.connectedId) {
-            this.doConnect(this.data.connectedId, this.data.connectedName)
+          if (this.data.selectedId) {
+            this.doConnect(this.data.selectedId, this.data.selectedName)
           }
         }
       })
@@ -71,6 +71,7 @@ Component({
           )
         },
         fail: res => {
+          this.setData({ failedId: deviceId })
           wx.showModal({
             title: '连接蓝牙失败',
             content: JSON.stringify(res)
