@@ -28,15 +28,18 @@
 
 .device_item {
   display: flex;
+  justify-content: space-between;
   border-bottom: 1px solid #EEE;
   padding: 0.5em 0.75em;
   color: #666;
 }
 
-.device_item__inner {
+.device_item-left {
   flex-grow: 1;
-  display: flex;
-  justify-content: space-between;
+}
+
+.device_item-right {
+
 }
 
 .device_item_hover {

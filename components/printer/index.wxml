@@ -9,32 +9,30 @@
     wx:key="index"
     class="device_item"
   >
-    <view class="device_item__inner">
-      <text>{{item.name}}</text>
-      <text
-        wx:if="{{connectedId === item.deviceId && selectedId === item.deviceId}}"
-        bind:tap="closeBLEConnection"
-        data-device-id="{{item.deviceId}}"
-        data-device-name="{{item.name || item.localName}}"
-        class="weui-badge"
-        hover-class="device_item_hover"
-      >已连接（点击断开）</text>
-      <text
-        wx:elif="{{selectedId === item.deviceId && failedId == item.deviceId}}"
-        class="weui-badge"
-      >连接失败</text>
-      <text
-        wx:elif="{{selectedId === item.deviceId}}"
-        class="weui-badge"
-      >连接中</text>
-      <text
-        wx:else
-        bind:tap="createBLEConnection"
-        data-device-id="{{item.deviceId}}"
-        data-device-name="{{item.name || item.localName}}"
-        class="weui-badge"
-        hover-class="device_item_hover"
-      >未连接（点击连接）</text>
-    </view>
+    <text class="device_item-lfet">{{item.name}}</text>
+    <text
+      wx:if="{{connectedId === item.deviceId && selectedId === item.deviceId}}"
+      bind:tap="closeBLEConnection"
+      data-device-id="{{item.deviceId}}"
+      data-device-name="{{item.name || item.localName}}"
+      class="device_item-right weui-badge"
+      hover-class="device_item_hover"
+    >已连接（点击断开）</text>
+    <text
+      wx:elif="{{selectedId === item.deviceId && failedId == item.deviceId}}"
+      class="weui-badge"
+    >连接失败</text>
+    <text
+      wx:elif="{{selectedId === item.deviceId}}"
+      class="weui-badge"
+    >连接中</text>
+    <text
+      wx:else
+      bind:tap="createBLEConnection"
+      data-device-id="{{item.deviceId}}"
+      data-device-name="{{item.name || item.localName}}"
+      class="weui-badge"
+      hover-class="device_item_hover"
+    >未连接（点击连接）</text>
   </view>
 </scroll-view>
