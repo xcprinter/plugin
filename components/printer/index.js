@@ -71,11 +71,22 @@ Component({
           )
         },
         fail: res => {
-          this.setData({ failedId: deviceId })
-          wx.showModal({
-            title: '连接蓝牙失败',
-            content: JSON.stringify(res)
-          })
+          if (res.errno === 1509007) {
+            this.setData({ connectedId: deviceId })
+            this.triggerEvent(
+              'connected',
+              {
+                deviceId: deviceId,
+                deviceName: deviceName
+              }
+            )
+          } else {
+            this.setData({ failedId: deviceId })
+            wx.showModal({
+              title: '连接蓝牙失败',
+              content: JSON.stringify(res)
+            })
+          }
         }
       })
     },

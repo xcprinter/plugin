@@ -36,6 +36,7 @@
 
 .device_item-left {
   flex-grow: 1;
+  word-break: break-all;
 }
 
 .device_item-right {
