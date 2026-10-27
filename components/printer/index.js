@@ -21,6 +21,13 @@ Component({
 
   lifetimes: {
     ready() {
+      wx.onNeedPrivacyAuthorization((resolve, eventInfo) => {
+        this.setData({
+          showPrivacy: true
+        })
+        this.resolvePrivacyAuthorization = resolve
+      })
+
       this.setData({
         selectedId: wx.getStorageSync('selectedId'),
         selectedName: wx.getStorageSync('selectedName')
@@ -119,6 +126,13 @@ Component({
             }
           })
         }
+      })
+    },
+
+    handleAgreePrivacyAuthorization() {
+      this.resolvePrivacyAuthorization({ 
+        buttonId: 'agree-btn',
+        event: 'agree' 
       })
     }
   }
