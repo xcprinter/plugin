@@ -105,7 +105,7 @@ export default class extends Bluetooth {
     })
   }
 
-  createBLEConnection(deviceId, successCallback) {
+  createBLEConnection(deviceId, successCallback, failCallback) {
     this.api.createBLEConnection({
       deviceId,
       success: res => {
@@ -120,6 +120,9 @@ export default class extends Bluetooth {
           title: '连接蓝牙设备失败',
           content: JSON.stringify(res)
         })
+        if (failCallback) {
+          failCallback?.({ res: res })
+        }
       }
     })
   }

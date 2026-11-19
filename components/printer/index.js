@@ -59,9 +59,9 @@ Component({
 
     doConnect(deviceId, deviceName) {
       console.log('正在连接设备：', deviceId)
-      wx.createBLEConnection({
-        deviceId: deviceId,
-        success: res => {
+      this.printer.createBLEConnection(
+        deviceId,
+        res => {
           this.setData({ connectedId: deviceId })
           this.triggerEvent(
             'connected',
@@ -71,7 +71,7 @@ Component({
             }
           )
         },
-        fail: res => {
+        res => {
           if (res.errno === 1509007) {
             this.setData({ connectedId: deviceId })
             this.triggerEvent(
@@ -83,13 +83,9 @@ Component({
             )
           } else {
             this.setData({ failedId: deviceId })
-            wx.showModal({
-              title: '连接蓝牙失败',
-              content: JSON.stringify(res)
-            })
           }
         }
-      })
+      )
     },
 
     closeBLEConnection(e) {
