@@ -1,3 +1,4 @@
+import '../../utils/text-encoding-polyfill'
 import BluetoothWeighter from '../../utils/bluetooth_weigher'
 
 Page({

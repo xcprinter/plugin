@@ -81,9 +81,12 @@ export default class {
         console.debug('开始搜寻：', discoveryRes)
         this.api.onBluetoothDeviceFound(foundRes => {
           // 因为 uniApp 没有实现停止监听的方法，所以通过传递 ObjectId 来比较打印服务实例
-          console.debug('='.repeat(50))
-          console.debug('发现新设备（OnFound）：', this.objectId, JSON.stringify(foundRes.devices))
-          this.#filterBluetoothDevices(foundRes.devices, this.objectId, successCallback)
+          const allExist = foundRes.devices.every(e => this.allDevices.map(i => i.deviceId).includes(e.deviceId))
+          if (!allExist) {
+            console.debug('='.repeat(50))
+            console.debug('发现新设备（OnFound）：', this.objectId, JSON.stringify(foundRes.devices))
+            this.#filterBluetoothDevices(foundRes.devices, this.objectId, successCallback)
+          }
         })
       },
       fail: res => {

@@ -1,3 +1,4 @@
+import '../../utils/text-encoding-polyfill'
 import BluetoothPrinter from '../../utils/bluetooth_printer'
 import { PrintCommand } from 'xcprinter'
 
