@@ -39,8 +39,8 @@
   word-break: break-all;
 }
 
-.device_item-right {
-
+.text-success {
+  color: green;
 }
 
 .device_item_hover {
@@ -48,16 +48,10 @@
   color: white;
 }
 
-.weui-badge {
+.device_item-right {
   color: gray;
-  align-items: center;
   font-size: 0.8rem;
-  border-radius: 4px;
-  display: inline-flex;
-  justify-content: center;
   line-height: 1.5;
   margin-left: 0.5rem;
-  padding-left: 0.75em;
-  padding-right: 0.75em;
   white-space: nowrap;
 }

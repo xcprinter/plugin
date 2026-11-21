@@ -23,23 +23,23 @@
       bind:tap="closeBLEConnection"
       data-device-id="{{item.deviceId}}"
       data-device-name="{{item.name || item.localName}}"
-      class="device_item-right weui-badge"
+      class="device_item-right text-success"
       hover-class="device_item_hover"
     >已连接（点击断开）</text>
     <text
       wx:elif="{{selectedId === item.deviceId && failedId == item.deviceId}}"
-      class="weui-badge"
+      class="device_item-right"
     >连接失败</text>
     <text
       wx:elif="{{selectedId === item.deviceId}}"
-      class="weui-badge"
+      class="device_item-right"
     >连接中</text>
     <text
       wx:else
       bind:tap="createBLEConnection"
       data-device-id="{{item.deviceId}}"
       data-device-name="{{item.name || item.localName}}"
-      class="weui-badge"
+      class="device_item-right"
       hover-class="device_item_hover"
     >未连接（点击连接）</text>
   </view>
